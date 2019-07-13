@@ -10,6 +10,7 @@ import UIKit
 
 class LeagueCell: UITableViewCell {
 
+    @IBOutlet weak var leagueDescriptionLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

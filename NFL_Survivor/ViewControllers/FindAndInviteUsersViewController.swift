@@ -9,22 +9,32 @@
 import UIKit
 
 class FindAndInviteUsersViewController: UIViewController {
-
+    @IBOutlet weak var usernameTextField: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func didTapFind(_ sender: Any) {
+        let username = self.usernameTextField.text!
+        if username.count > 5 {
+            FirebaseAPIManager.findUser(username) { (userNSDic, code) in
+                if code == FirebaseAPIManager.USERNAME_EXISTS && userNSDic != nil {
+                    print("User: \(username) found")
+                    let userDic = userNSDic as! [String : Any]
+                    let userFoundsID = userDic["userID"] as! String
+                    print("Users ID: \(userFoundsID)")
+                    FirebaseAPIManager.sendUserInvite(userFoundsID)
+                    
+                } else if code == FirebaseAPIManager.USERNAME_NOT_FOUND {
+                    print("User: \(username) does not exist")
+                }
+            }
+        }
     }
-    */
+    
+
 
 }

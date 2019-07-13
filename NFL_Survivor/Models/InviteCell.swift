@@ -10,6 +10,7 @@ import UIKit
 
 class InviteCell: UITableViewCell {
 
+    @IBOutlet weak var inviteDescriptionLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
